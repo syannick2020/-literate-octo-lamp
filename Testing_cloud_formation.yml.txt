@@ -1,0 +1,22 @@
+
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A sample template
+Resources:
+  MyEC2Instance: 
+    Type: "AWS::EC2::Instance"
+    Properties: 
+      ImageId: "ami-032930428bf1abbff"
+      InstanceType: t2.micro
+      KeyName: demokey
+      SecurityGroups:
+      - default
+      - !Ref SSHSecurityGroup
+SSHSecurityGroup:
+    Type: AWS::EC2::SecurityGroups
+    Properties:
+      GroupDescription: my new SSHSecurityGroup
+      SecurityGroupIngress:
+       - Ipprotocol: tcp
+         FromPort: '22'
+         ToPort: '22'
+         CidrIp: 0.0.0.0/0
